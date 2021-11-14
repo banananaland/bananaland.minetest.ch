@@ -1,0 +1,49 @@
+version: "2"
+
+services:
+ minetest:
+  image: buckaroobanzay/minetest:5.4.1-r1
+  restart: always
+  networks:
+   - terminator
+   - default
+  ports:
+   - "30000:30000/udp"
+  depends_on:
+   - "postgres"
+  volumes:
+   - "./data/minetest:/data"
+   - "./data/crashlogs:/crashlogs"
+   - "./data/minetest/debug.txt:/root/.minetest/debug.txt"
+   - "postgres_socket:/var/run/postgresql"
+  logging:
+   options:
+    max-size: 50m
+
+ postgres:
+  image: postgres:14.1-alpine
+  restart: always
+  shm_size: '2gb'
+  ports:
+   - "5432:5432"
+  environment:
+   POSTGRES_PASSWORD: enter
+  volumes:
+   - "./data/postgres:/var/lib/postgresql/data"
+   - "postgres_socket:/var/run/postgresql"
+  command:
+   - "postgres"
+   - "-c"
+   - "shared_buffers=4GB"
+   - "-c"
+   - "synchronous_commit=off"
+  logging:
+   options:
+    max-size: 50m
+
+volumes:
+  postgres_socket: {}
+
+networks:
+ terminator:
+  external: true
