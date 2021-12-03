@@ -39,6 +39,15 @@ services:
    options:
     max-size: 50m
 
+ beerchat-proxy:
+  image: beerchat/beerchat:1.1
+  depends_on:
+   - "minetest"
+  volumes:
+   - "./beerchat.js:/data/beerchat.js:ro"
+  restart: always
+
+
 volumes:
   postgres_socket: {}
 
