@@ -47,6 +47,61 @@ services:
    - "./beerchat.js:/data/beerchat.js:ro"
   restart: always
 
+ mapserver:
+  image: minetestmapserver/mapserver:4.3.4
+  restart: always
+  depends_on:
+   - "postgres"
+   - "minetest"
+  volumes:
+   - "./data/minetest/world:/minetest"
+   - "postgres_socket:/var/run/postgresql"
+  working_dir: "/minetest"
+  logging:
+   options:
+    max-size: 50m
+
+ manager:
+  image: buckaroobanzay/minetest_manager
+  depends_on:
+   - minetest
+  restart: always
+  volumes:
+   - "./data:/data"
+  environment:
+#   - WORLDMODS_DIR=/data/minetest/world/worldmods
+#   - WORLDMODS_BRANCH=master
+   - MEDIADIR=/data/nginx/html/media
+   - DEBUG_LOG=/data/minetest/debug.txt
+   - ERROR_LOG_OUTPUT=/data/nginx/html/error-log.txt
+  logging:
+   options:
+    max-size: 50m
+
+ nginx:
+  image: nginx:1.21.4
+  networks:
+   - terminator
+   - default
+  restart: always
+  depends_on:
+   - mapserver
+  labels:
+    - "traefik.enable=true"
+    - "traefik.docker.network=terminator"
+    - "traefik.http.routers.bananaland.rule=Host(`bananana.minetest.land`)"
+    - "traefik.http.services.bananaland.loadbalancer.server.port=80"
+    - "traefik.http.routers.bananaland.entrypoints=websecure"
+    - "traefik.http.routers.bananaland.tls.certresolver=default"
+  volumes:
+   - "./data/nginx/nginx.conf:/etc/nginx/nginx.conf:ro"
+   - "./data/nginx/htpasswd:/etc/nginx/htpasswd:ro"
+   - "./data/nginx/routes:/routes"
+   - "./data/nginx/html:/html"
+   - "./data/crashlogs:/crashlogs"
+  logging:
+   options:
+    max-size: 50m
 
 volumes:
   postgres_socket: {}
