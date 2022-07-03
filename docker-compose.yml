@@ -59,7 +59,7 @@ services:
   restart: always
 
  mapserver:
-  image: minetestmapserver/mapserver:4.3.4
+  image: minetestmapserver/mapserver:4.5.0
   restart: always
   depends_on:
    - "postgres"
