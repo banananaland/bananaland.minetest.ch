@@ -80,8 +80,8 @@ services:
   volumes:
    - "./data:/data"
   environment:
-#   - WORLDMODS_DIR=/data/minetest/world/worldmods
-#   - WORLDMODS_BRANCH=master
+   - WORLDMODS_DIR=/data/minetest/world/worldmods
+   - WORLDMODS_BRANCH=master
    - MEDIADIR=/data/nginx/html/media
    - DEBUG_LOG=/data/minetest/debug.txt
    - ERROR_LOG_OUTPUT=/data/nginx/html/error-log.txt
