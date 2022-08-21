@@ -1,0 +1,36 @@
+[irc]
+[irc.Libera]
+Server="irc.libera.chat:6667"
+Nick="bananabot"
+Password="{{irc_password}}"
+RemoteNickFormat="[{BRIDGE}] <{NICK}> "
+ColorNicks=true
+ShowJoinPart=true
+
+[discord]
+[discord.Discord]
+Token="{{discord_token}}"
+Server="642691106932523028"
+RemoteNickFormat="[{BRIDGE}] <{NICK}> "
+ShowJoinPart=true
+UseUserName=true
+
+[api.minetest]
+BindAddress="0.0.0.0:4242"
+Token="{{matterbridge_token}}"
+Buffer=1000
+RemoteNickFormat="[{BRIDGE}] {NICK}"
+ShowJoinPart=true
+
+[[gateway]]
+name="main"
+enable=true
+[[gateway.inout]]
+account="irc.Libera"
+channel="#bananaland"
+[[gateway.inout]]
+account = "discord.Discord"
+channel="server-bridge"
+[[gateway.inout]]
+account="api.minetest"
+channel="api"

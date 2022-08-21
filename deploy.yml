@@ -9,12 +9,18 @@
         repo: https://github.com/banananaland/bananaland.minetest.ch
         dest: "{{ compose_directory }}"
         single_branch: yes
+        force: yes
         version: master
 
     - name: Template minetest config
       template:
         src: "minetest.conf"
         dest: "{{compose_directory}}/data/minetest/minetest.conf"
+
+    - name: Template matterbridge config
+      template:
+        src: "matterbridge.toml"
+        dest: "{{compose_directory}}/matterbridge.toml"
 
     - name: Create and start services
       community.general.docker_compose:
