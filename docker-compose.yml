@@ -43,7 +43,7 @@ services:
   image: buckaroobanzay/mtui:1.5
   environment:
    WORLD_DIR: "/data/world"
-   COOKIE_DOMAIN: "bananana.minetest.land"
+   COOKIE_DOMAIN: "bananana.minetest.ch"
    COOKIE_SECURE: "true"
    COOKIE_PATH: "/ui"
   volumes:
@@ -101,10 +101,13 @@ services:
   labels:
     - "traefik.enable=true"
     - "traefik.docker.network=terminator"
-    - "traefik.http.routers.bananaland.rule=Host(`bananana.minetest.land`)"
+    - "traefik.http.routers.bananaland.rule=Host(`bananana.minetest.land`) || Host(`bananaland.minetest.ch`)"
     - "traefik.http.services.bananaland.loadbalancer.server.port=80"
     - "traefik.http.routers.bananaland.entrypoints=websecure"
     - "traefik.http.routers.bananaland.tls.certresolver=default"
+    - "traefik.http.routers.bananaland.middlewares=bananaland_ch_redir"
+    - "traefik.http.middlewares.bananaland_ch_redir.redirectregex.regex=^https?://bananana\\.minetest\\.land/(.*)"
+    - "traefik.http.middlewares.bananaland_ch_redir.redirectregex.replacement=https://bananaland.minetest.ch/$$1"
   volumes:
    - "./data/nginx/nginx.conf:/etc/nginx/nginx.conf:ro"
    - "./data/nginx/htpasswd:/etc/nginx/htpasswd:ro"

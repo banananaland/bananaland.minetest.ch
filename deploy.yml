@@ -2,11 +2,11 @@
 - hosts: all
   remote_user: root
   vars:
-    compose_directory: /data/bananana.minetest.land
+    compose_directory: /data/bananaland.minetest.ch
   tasks:
     - name: Checkout git master
       ansible.builtin.git:
-        repo: https://github.com/banananaland/banananaland.minetest.land
+        repo: https://github.com/banananaland/bananaland.minetest.ch
         dest: "{{ compose_directory }}"
         single_branch: yes
         version: master
