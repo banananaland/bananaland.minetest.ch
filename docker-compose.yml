@@ -46,6 +46,8 @@ services:
    COOKIE_DOMAIN: "bananaland.minetest.ch"
    COOKIE_SECURE: "true"
    COOKIE_PATH: "/ui"
+   JWTKEY: "{{mtui_jwtkey}}"
+   APIKEY: "{{mtui_key}}"
   volumes:
    - "./data/minetest:/data"
    - "postgres_socket:/var/run/postgresql"
