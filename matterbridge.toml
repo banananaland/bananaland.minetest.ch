@@ -35,3 +35,16 @@ channel="server-bridge"
 [[gateway.inout]]
 account="api.minetest"
 channel="api"
+
+[[gateway]]
+name="ve"
+enable=true
+[[gateway.inout]]
+account="irc.Libera"
+channel="#ve-minetest-servers"
+[[gateway.inout]]
+account = "discord.Discord"
+channel="ve-minetest-servers"
+[[gateway.inout]]
+account="api.minetest"
+channel="api"
