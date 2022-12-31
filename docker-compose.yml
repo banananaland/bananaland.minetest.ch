@@ -40,7 +40,7 @@ services:
     max-size: 50m
 
  ui:
-  image: buckaroobanzay/mtui:1.13
+  image: buckaroobanzay/mtui:1.14
   environment:
    WORLD_DIR: "/data/world"
    COOKIE_DOMAIN: "bananaland.minetest.ch"
