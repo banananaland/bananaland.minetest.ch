@@ -51,7 +51,7 @@ services:
    - "postgres_socket:/var/run/postgresql"
 
  matterbridge:
-   image: 42wim/matterbridge:1.25.2
+   image: 42wim/matterbridge:1.26.0
    volumes:
     - ./matterbridge.toml:/etc/matterbridge/matterbridge.toml
 
