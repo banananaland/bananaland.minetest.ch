@@ -46,6 +46,7 @@ services:
    COOKIE_DOMAIN: "bananaland.minetest.ch"
    COOKIE_SECURE: "true"
    COOKIE_PATH: "/ui"
+   LOGLEVEL: debug
   volumes:
    - "./data/minetest:/data"
    - "postgres_socket:/var/run/postgresql"
