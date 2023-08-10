@@ -40,7 +40,7 @@ services:
     max-size: 50m
 
  ui:
-  image: ghcr.io/minetest-go/mtui:1.35
+  image: ghcr.io/minetest-go/mtui:1.36
   environment:
    WORLD_DIR: "/data/world"
    COOKIE_DOMAIN: "bananaland.minetest.ch"
