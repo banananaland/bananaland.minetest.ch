@@ -33,3 +33,8 @@
         pull: yes
         build: yes
         remove_orphans: yes
+
+    - name: Reload nginx config
+      shell:
+        cmd: "docker-compose exec -T nginx nginx -s reload"
+        chdir: "{{ compose_directory }}"

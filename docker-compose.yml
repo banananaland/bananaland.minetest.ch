@@ -106,8 +106,7 @@ services:
   volumes:
    - "./data/nginx/nginx.conf:/etc/nginx/nginx.conf:ro"
    - "./data/nginx/htpasswd:/etc/nginx/htpasswd:ro"
-   - "./data/nginx/routes:/routes"
-   - "./data/nginx/html:/html"
+   - "./data/html:/html"
    - "./data/crashlogs:/crashlogs"
   logging:
    options:
