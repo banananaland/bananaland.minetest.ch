@@ -59,7 +59,7 @@ services:
     - ./matterbridge.toml:/etc/matterbridge/matterbridge.toml
 
  mapserver:
-  image: minetestmapserver/mapserver:4.8.0
+  image: minetestmapserver/mapserver:4.9.0
   restart: always
   depends_on:
    - "postgres"
