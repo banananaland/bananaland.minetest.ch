@@ -42,6 +42,7 @@ services:
 
  ui:
   image: ghcr.io/minetest-go/mtui:v1.71
+  restart: always
   environment:
    WORLD_DIR: "/data/world"
    COOKIE_DOMAIN: "bananaland.minetest.ch"
@@ -55,6 +56,7 @@ services:
 
  matterbridge:
    image: 42wim/matterbridge:1.26.0
+   restart: always
    volumes:
     - ./matterbridge.toml:/etc/matterbridge/matterbridge.toml
 
