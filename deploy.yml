@@ -28,7 +28,7 @@
         dest: "{{compose_directory}}/docker-compose.yml"
 
     - name: Create and start services
-      community.docker.docker_compose_v2:
+      shell:
         cmd: "docker-compose up -d --build --remove-orphans"
         chdir: "{{ compose_directory }}"
 
