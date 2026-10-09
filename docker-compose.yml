@@ -2,7 +2,7 @@ version: "2"
 
 services:
  bananaland-luanti:
-  image: buckaroobanzay/minetest:5.15.2-r1
+  image: ghcr.io/luanti-org/luanti:5.17.0
   restart: always
   networks:
    - terminator
@@ -12,14 +12,12 @@ services:
   depends_on:
    - "postgres"
   volumes:
-   - "./data/minetest:/data"
-   - "./minetest_game:/data/world/game"
-   - "./data/crashlogs:/crashlogs"
-   - "./data/minetest/debug.txt:/root/.minetest/debug.txt"
+   - "./data/minetest/world:/root/.minetest/worlds/world"
+   - "./minetest_game:/root/.minetest/worlds/world/game"
+   - "./data/minetest/minetest.conf:/minetest.conf"
+   - "./data/logs:/logs"
    - "postgres_socket:/var/run/postgresql"
-  logging:
-   options:
-    max-size: 50m
+  command: ["--config", "/minetest.conf", "--logfile", "/logs/debug.txt"]
 
  postgres:
   image: postgres:14.1-alpine
@@ -111,7 +109,6 @@ services:
    - "./data/nginx/nginx.conf:/etc/nginx/nginx.conf:ro"
    - "./data/nginx/htpasswd:/etc/nginx/htpasswd:ro"
    - "./data/html:/html"
-   - "./data/crashlogs:/crashlogs"
   logging:
    options:
     max-size: 50m
